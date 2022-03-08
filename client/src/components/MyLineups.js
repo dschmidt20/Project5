@@ -42,7 +42,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -78,7 +78,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -114,7 +114,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -150,7 +150,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -186,7 +186,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -222,7 +222,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -258,7 +258,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -294,7 +294,7 @@ function MyLineups({ user, hitters }) {
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          process.env.REACT_APP_API_KEY,
         },
       },
       []

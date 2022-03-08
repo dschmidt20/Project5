@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import untitled from "./untitled.png";
 import { Table } from "react-bootstrap";
 
 function LineupCard({ lineups, playerDeet, viewStats }) {
@@ -51,7 +50,6 @@ function LineupCard({ lineups, playerDeet, viewStats }) {
     //         flexDirection: "column",
     //         alignItems: "center",
     //         justifyContent: "center",
-    //       backgroundImage: `url(${untitled})`,
     //       backgroundRepeat: "no-repeat",
     //       backgroundPosition: "center",
     //       backgroundSize: "33%",

@@ -13,7 +13,6 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [user, setUser] = useState({});
 const playersAPI = '/players'
-
 console.log(players)
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -28,7 +27,7 @@ console.log(players)
 // 	"method": "GET",
 // 	"headers": {
 // 		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
-// 		"x-rapidapi-key": "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80"
+// 		"x-rapidapi-key": process.env.REACT_APP_API_KEY
 // 	}
 // })
 // .then(response => response.json()).then(r => console.log(r))
@@ -55,8 +54,7 @@ console.log(players)
         method: "GET",
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
-          "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+          "x-rapidapi-key": process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -76,7 +74,7 @@ console.log(players)
   //     "method": "GET",
   //     "headers": {
   //       "x-rapidapi-host": "mlb-data.p.rapidapi.com",
-  //       "x-rapidapi-key": "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80"
+  //       "x-rapidapi-key": process.env.REACT_APP_API_KEY
   //     }
   //   }, [])
   //   .then(response => response.json())
