@@ -58,7 +58,6 @@ function LineupMaker({ user, hitters }) {
     right_id: 0,
     user_id: user.id,
   });
-
   function handleSubmit() {
     const submittedLineup = {
       ...newLineup,
@@ -73,7 +72,8 @@ function LineupMaker({ user, hitters }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((submittedLineup) => {
-          navigate("/mylineups");
+          alert('lineup recieved successfully!')
+          navigate("/home");
         });
       } else {
         r.json().then((err) => console.log(err.errors)); //finish error handling
@@ -235,7 +235,7 @@ function LineupMaker({ user, hitters }) {
 
       </div>
         <div style={{paddingBottom:'30px'}}>
-          <Button onClick={handleSubmit}>Submit Lineup</Button>
+          <Button variant='warning' style={{border:'1px solid black'}} onClick={handleSubmit}>Submit Lineup</Button>
         </div>
       </div>
     );

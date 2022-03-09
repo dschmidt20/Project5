@@ -28,7 +28,7 @@ function PitcherStatTable({ pitcher, styleA, styleB, styleC }) {
       return <td>C</td>;
     } else if (pitcher.k9 > 4.75) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (pitcher.k9 < 4.75) {
+    } else if (pitcher.k9 <= 4.75) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
@@ -43,22 +43,22 @@ function PitcherStatTable({ pitcher, styleA, styleB, styleC }) {
       return <td>C</td>;
     } else if (pitcher.bb9 < 4) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (pitcher.bb9 > 4) {
+    } else if (pitcher.bb9 >= 4) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
   function pHrGrade() {
     if (pitcher.hr9 < 0.2) {
       return <td style={{ color: "green" }}>A++</td>;
-    } else if (pitcher.hr9 < .42) {
+    } else if (pitcher.hr9 < .82) {
       return <td style={{ color: "green" }}>A</td>;
-    } else if (pitcher.hr9 < 1) {
+    } else if (pitcher.hr9 < 1.4) {
       return <td style={{ color: "green" }}>B</td>;
-    } else if (pitcher.hr9 < 1.5) {
+    } else if (pitcher.hr9 < 1.9) {
       return <td>C</td>;
-    } else if (pitcher.hr9 < 2) {
+    } else if (pitcher.hr9 < 2.3) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (pitcher.hr9 > 2) {
+    } else if (pitcher.hr9 >= 2.3) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
@@ -77,8 +77,23 @@ function PitcherStatTable({ pitcher, styleA, styleB, styleC }) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
+  function pWhipGrade() {
+    if (pitcher.whip < 1.1) {
+      return <td style={{ color: "green" }}>A++</td>;
+    } else if (pitcher.whip < 1.2) {
+      return <td style={{ color: "green" }}>A</td>;
+    } else if (pitcher.whip < 1.4) {
+      return <td style={{ color: "green" }}>B</td>;
+    } else if (pitcher.whip < 1.55) {
+      return <td>C</td>;
+    } else if (pitcher.whip < 1.7) {
+      return <td style={{ color: "red" }}>D</td>;
+    } else if (pitcher.whip >=1.7) {
+      return <td style={{ color: "red" }}>F</td>;
+    }
+  }
   return (
-    <div style={{margin:'auto',width:'50%'}}>
+    <div style={{marginRight:'auto',width:'40%'}}>
       <Table striped bordered hover style={styleA } size='sm'>
         <thead>
           <tr>
@@ -112,6 +127,11 @@ function PitcherStatTable({ pitcher, styleA, styleB, styleC }) {
             <td>h/9</td>
             <td>{pitcher.h9}</td>
             <td>{pH9Grade()}</td>
+          </tr>
+          <tr>
+            <td>whip</td>
+            <td>{pitcher.whip}</td>
+            <td>{pWhipGrade()}</td>
           </tr>
         </tbody>
       </Table>

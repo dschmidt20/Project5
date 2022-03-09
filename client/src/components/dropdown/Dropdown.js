@@ -29,9 +29,9 @@ function Dropdown({ options, prompt, value, onChange, q, setQ }) {
           <input
             type="text"
             placeholder={`Select ${prompt}`}
+            required
             ref={ref}
             value={displayValue()}
-            required
             style={{width:110, fontSize:'10pt'}}
             onChange={(e) => {
               setQ(e.target.value);

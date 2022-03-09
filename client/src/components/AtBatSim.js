@@ -16,6 +16,11 @@ function AtBatSim({ hitters, pitchers }) {
   const [nowSimming, setNowSimming] = useState(false);
 
   function handleSubmit() {
+    if(hitter.length === 0){
+      alert('You must pick a hitter!')
+    }else if (pitcher.length === 0){
+    alert('You must pick a pitcher!')
+    }else{
     fetch(
       `https://mlb-data.p.rapidapi.com/json/named.sport_career_hitting.bam?player_id='${hitter.hitter_id}'&game_type='R'&league_list_id='mlb'`,
       {
@@ -85,6 +90,7 @@ function AtBatSim({ hitters, pitchers }) {
             so: r.sport_career_pitching.queryResults.row.so,
             sf: r.sport_career_pitching.queryResults.row.sf,
             sac: r.sport_career_pitching.queryResults.row.sac,
+            whip: r.sport_career_pitching.queryResults.row.whip
           });
         });
       }
@@ -93,6 +99,8 @@ function AtBatSim({ hitters, pitchers }) {
     setSimStarted(!simStarted);
   }
 
+}
+
   return (
     <div
       style={{
@@ -100,6 +108,7 @@ function AtBatSim({ hitters, pitchers }) {
         // display: "flex",
         // flexDirection: "column",
         // alignItems: "center",
+        alignContent:'space-between'
         // justifyContent: "center",
       }}
     >

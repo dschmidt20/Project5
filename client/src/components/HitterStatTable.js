@@ -32,9 +32,9 @@ function StatTables({ hitter, styleA, styleB, styleC }) {
       return <td style={{ color: "green" }}>B</td>;
     } else if (hitter.avg >= 0.26 || hitter.h >= 2000) {
       return <td>C</td>;
-    } else if (hitter.avg >= 0.24 || hitter.h >= 1500) {
+    } else if (hitter.avg >= 0.23 || hitter.h >= 1500) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (hitter.avg < 0.22 || hitter.h >= 1000) {
+    } else if (hitter.avg < 0.23 || hitter.h >= 1000) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
@@ -60,11 +60,11 @@ function StatTables({ hitter, styleA, styleB, styleC }) {
       return <td style={{ color: "green" }}>A</td>;
     } else if (hitter.slg > 0.5) {
       return <td style={{ color: "green" }}>B</td>;
-    } else if (hitter.slg > 0.44) {
+    } else if (hitter.slg > 0.41) {
       return <td>C</td>;
-    } else if (hitter.slg >= 0.375) {
+    } else if (hitter.slg >= 0.355) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (hitter.slg < 0.375) {
+    } else if (hitter.slg < 0.355) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
@@ -75,17 +75,17 @@ function StatTables({ hitter, styleA, styleB, styleC }) {
       return <td style={{ color: "green" }}>A</td>;
     } else if (hitter.obp > 0.375) {
       return <td style={{ color: "green" }}>B</td>;
-    } else if (hitter.obp > 0.35) {
+    } else if (hitter.obp > 0.325) {
       return <td>C</td>;
-    } else if (hitter.obp >= 0.32) {
+    } else if (hitter.obp >= 0.30) {
       return <td style={{ color: "red" }}>D</td>;
-    } else if (hitter.obp < 0.32) {
+    } else if (hitter.obp < 0.30) {
       return <td style={{ color: "red" }}>F</td>;
     }
   }
 
   return (
-    <div style={{margin:'auto', width:'50%'}}>
+    <div style={{marginLeft:'auto', width:'40%'}}>
       <Table
         striped
         bordered

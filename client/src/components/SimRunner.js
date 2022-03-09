@@ -2,7 +2,21 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 
-function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, setPlayersChosen, setHitter, setPitcher, simStarted, setSimStarted, nowSimming, setNowSimming }) {
+function SimRunner({
+  hitter,
+  pitcher,
+  styleA,
+  styleB,
+  styleC,
+  playersChosen,
+  setPlayersChosen,
+  setHitter,
+  setPitcher,
+  simStarted,
+  setSimStarted,
+  nowSimming,
+  setNowSimming,
+}) {
   const [abs, setAbs] = useState(0);
   const [bbs, setBbs] = useState(0);
   const [ks, setKs] = useState(0);
@@ -144,7 +158,8 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
         justifyContent: "center",
       }}
     >
-      <Table striped bordered hover style={styleA} size="sm">
+    <div>
+      <Table striped bordered hover style={{textAlign:'center'}}  size="sm">
         <thead>
           <tr>
             <th style={styleC}></th>
@@ -153,11 +168,11 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr>
-            <td>results</td>
+            <td>hits/ab</td>
             <td>
-              {singles + doubles + triples + dingers}/{abs}
+              {(singles + doubles + triples + dingers).toLocaleString()}/{abs}
             </td>
           </tr>
           <tr>
@@ -170,18 +185,18 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
           </tr>
           <tr>
             <td>hr</td>
-            <td>{dingers}</td>
+            <td>{dingers.toLocaleString()}</td>
           </tr>
-          
+
           <tr>
             <td>k's</td>
-            <td>{ks}</td>
+            <td>{ks.toLocaleString()}</td>
           </tr>
           <tr>
             <td>bb</td>
-            <td>{bbs}</td>
+            <td>{bbs.toLocaleString()}</td>
           </tr>
-          
+
           <tr>
             <td>obp</td>
             <td>
@@ -207,44 +222,115 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
         </tbody>
       </Table>
       <br />
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" onClick={() => runSim(1)}>Run The Simulation 1x!</Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" onClick={() => runSim(10)}>Run The Simulation 10x!</Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" onClick={() => runSim(100)}>Run The Simulation 100x!</Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" onClick={() => runSim(1000)}>Run The Simulation 1000x!</Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" onClick={() => runSim(+hitter.ab + +hitter.bb)}>
-        Re-Sim Their Career
-      </Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" 
-        onClick={() => {
-          setAbs(0);
-          setBbs(0);
-          setDingers(0);
-          setSingles(0);
-          setDoubles(0);
-          setTriples(0);
-          setKs(0);
+      </div>
+      <div style={{
+          paddingTop: "15px",
+          // flexDirection: "column",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+      <div
+        style={{
+          paddingTop: "15px",
+          flexDirection: "column",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        Restart The Simulation
-      </Button>
-      <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} className="m-1" 
-        onClick={() => {
-        //   setPlayersChosen(!playersChosen);
-          setSimStarted(!simStarted);
-          setHitter({})
-          setPitcher({})
-          setAbs(0);
-          setBbs(0);
-          setDingers(0);
-          setSingles(0);
-          setDoubles(0);
-          setTriples(0);
-          setKs(0);
-          setNowSimming(!nowSimming)
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => runSim(1)}
+        >
+          Simulate matchup 1x!
+        </Button>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => runSim(10)}
+        >
+          Simulate matchup 10x!
+        </Button>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => runSim(100)}
+        >
+          Simulate matchup 100x!
+        </Button>
+      </div>
+      <div
+        style={{
+          width: "50%",
+          paddingTop: "15px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        Choose Different Players
-      </Button>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => runSim(1000)}
+        >
+          Simulate matchup 1000x!
+        </Button>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => runSim(+hitter.ab + +hitter.bb)}
+        >
+          Re-Sim Hitter's Career
+        </Button>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => {
+            setAbs(0);
+            setBbs(0);
+            setDingers(0);
+            setSingles(0);
+            setDoubles(0);
+            setTriples(0);
+            setKs(0);
+          }}
+        >
+          Restart Simulation
+        </Button></div> </div>
+        <div>
+        <Button
+          variant="light"
+          style={{ backgroundColor: "rgb(255, 187, 2)", width:'100%' }}
+          className="m-1"
+          onClick={() => {
+            //   setPlayersChosen(!playersChosen);
+            setSimStarted(!simStarted);
+            setHitter({});
+            setPitcher({});
+            setAbs(0);
+            setBbs(0);
+            setDingers(0);
+            setSingles(0);
+            setDoubles(0);
+            setTriples(0);
+            setKs(0);
+            setNowSimming(!nowSimming);
+          }}
+        >
+          Choose Different Players
+        </Button>
+       
+      
+    </div>
     </div>
   );
 }

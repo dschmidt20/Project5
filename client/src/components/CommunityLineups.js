@@ -382,6 +382,8 @@ function CommunityLineups({ currentUser, hitters }) {
                 alignItems: "center",
                 justifyContent: "center",
                 textDecorationLine: "underline",
+                height:'25vh'
+
               }}
             >
               {otherUserSelected
@@ -420,7 +422,7 @@ function CommunityLineups({ currentUser, hitters }) {
               <thead>
                 <tr>
                   <th>stat</th>
-                  <th></th>
+                  <th>totals</th>
                   <th>Comparison to "Best" Lineup</th>
                 </tr>
               </thead>
@@ -437,7 +439,7 @@ function CommunityLineups({ currentUser, hitters }) {
                   </td>
                 </tr>
                 <tr style={{ width: "2000%" }}>
-                  <td>Hits</td>
+                  <td>hits</td>
                   <td>{loadedStats ? h : "calculating..."}</td>
                   <td>
                     {loadedStats

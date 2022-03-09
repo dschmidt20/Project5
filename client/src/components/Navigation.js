@@ -17,9 +17,9 @@ function Navigation({ user, setUser }) {
 
   return (
     <div style={{width:'100%',margin:'auto'}}>
-      {user ? ( 
+      {user.username ? ( 
       <Navbar style={{backgroundColor: 'rgb(119, 58, 0)', width:'100%'}} variant='dark'>
-        <Container style={{ paddingRight: "2%" }}>
+        <Container style={{ paddingRight: "2%", width:'100%' }}>
           <Navbar.Brand href="#home" style={{fontSize: '22pt'}} ><strong><img style={{height:'35px'}} alt='field' src="https://cdn.pixabay.com/photo/2018/10/28/13/22/baseball-3778774_960_720.png" />  Put Me In, Coach!  <img style={{height:'35px'}} src="https://cdn.pixabay.com/photo/2012/04/05/01/45/baseball-25761_960_720.png" alt='ball' /></strong></Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
@@ -29,7 +29,7 @@ function Navigation({ user, setUser }) {
           </Nav>
          <Navbar.Brand id='username' bg="dark" style={{textDecoration: 'underline'}} >Welcome, {user.username}!</Navbar.Brand>
          
-            <Button style={{backgroundColor: 'rgb(255, 187, 2)'}} variant="light" onClick={handleLogout}>
+            <Button style={{backgroundColor: 'rgb(255, 187, 2)', border:'black'}} variant="light" onClick={handleLogout}>
               Logout
             </Button>
         </Container>

@@ -35,7 +35,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -61,7 +60,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -87,7 +85,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -113,7 +110,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -139,7 +135,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -165,7 +160,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -191,7 +185,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          console.log(r);
           setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
@@ -231,7 +224,6 @@ function MyLineups({ user, hitters }) {
     });
     setLoadedStats(true);
   }
-console.log(playerDeet)
   useEffect(() => {
     filterHitters();
     handleLineupStats();
@@ -323,6 +315,7 @@ console.log(playerDeet)
             alignItems: "center",
             justifyContent: "center",
             textDecorationLine: "underline",
+            height:'25vh'
           }}
         >
           Click a button to see the corresponding lineup!
@@ -358,7 +351,7 @@ console.log(playerDeet)
               <thead>
                 <tr>
                   <th>stat</th>
-                  <th></th>
+                  <th>totals</th>
                   <th>Comparison to "Best" Lineup</th>
                 </tr>
               </thead>
