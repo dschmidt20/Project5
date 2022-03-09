@@ -152,14 +152,14 @@ function AtBatSim({ hitters, pitchers }) {
           >
             <HitterStatTable
               hitter={hitter}
-              styleA={{ width: "125%", margin: "auto", paddingTop: "15px" }}
+              styleA={{ width: "75%", margin: "auto", paddingTop: "15px" }}
               styleB={{ width: "40%", fontSize: "16pt" }}
               styleC={{ width: "20%" }}
             />
             <h2 style={{ margin: "auto" }}>VERSUS</h2>
             <PitcherStatTable
               pitcher={pitcher}
-              styleA={{ width: "125%", margin: "auto", paddingTop: "15px" }}
+              styleA={{ width: "75%", margin: "auto", paddingTop: "15px" }}
               styleB={{ width: "40%", fontSize: "16pt" }}
               styleC={{ width: "20%" }}
             />
@@ -275,36 +275,37 @@ function AtBatSim({ hitters, pitchers }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              // width:'175%'
             }}
           >
-            <img
+            {/* <img
               style={{ height: "200px" }}
               src="https://content.presentermedia.com/content/animsp/00011000/11747/baseball_swing_anim_300_wht.gif"
               alt="swing"
-            ></img>
+            ></img> */}
 
             <HitterStatTable
               hitter={hitter}
               styleA={{
-                width: "20%",
-                marginRight: "auto",
+                width: "70%",
+                margin: "auto",
                 paddingTop: "15px",
-                height: "5%",
+                // height: "5%",
               }}
               styleB={{ width: "40%", fontSize: "16pt" }}
               styleC={{ width: "20%" }}
             />
             <PitcherStatTable
               pitcher={pitcher}
-              styleA={{ width: "20%", marginLeft: "auto", paddingTop: "15px" }}
+              styleA={{ width: "70%", margin: "auto", paddingTop: "15px" }}
               styleB={{ width: "40%", fontSize: "16pt" }}
               styleC={{ width: "20%" }}
             />
-            <img
+            {/* <img
               style={{ height: "200px" }}
               src="https://i1.wp.com/www.winterhavenhs.com/wp-content/uploads/2018/07/www.animated-gifs.eu_.gif-6941222.gif"
               alt="pitcher"
-            ></img>
+            ></img> */}
           </div>
           <div
             style={{

@@ -78,7 +78,7 @@ function PitcherStatTable({ pitcher, styleA, styleB, styleC }) {
     }
   }
   return (
-    <div style={{marginRight:'auto'}}>
+    <div style={{margin:'auto',width:'50%'}}>
       <Table striped bordered hover style={styleA } size='sm'>
         <thead>
           <tr>

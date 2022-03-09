@@ -9,16 +9,16 @@ function Navigation({ user, setUser }) {
   function handleLogout() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser({});
+        setUser(null);
       }
     });
     navigate("/");
   }
 
   return (
-    <div>
-      {user.username ? ( 
-      <Navbar style={{backgroundColor: 'rgb(119, 58, 0)'}} variant='dark'>
+    <div style={{width:'100%',margin:'auto'}}>
+      {user ? ( 
+      <Navbar style={{backgroundColor: 'rgb(119, 58, 0)', width:'100%'}} variant='dark'>
         <Container style={{ paddingRight: "2%" }}>
           <Navbar.Brand href="#home" style={{fontSize: '22pt'}} ><strong><img style={{height:'35px'}} alt='field' src="https://cdn.pixabay.com/photo/2018/10/28/13/22/baseball-3778774_960_720.png" />  Put Me In, Coach!  <img style={{height:'35px'}} src="https://cdn.pixabay.com/photo/2012/04/05/01/45/baseball-25761_960_720.png" alt='ball' /></strong></Navbar.Brand>
           <Nav className="me-auto">

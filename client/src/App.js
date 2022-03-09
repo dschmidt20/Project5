@@ -7,6 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LineupMaker from "./components/LineupMaker";
 import MyLineups from "./components/MyLineups";
 import AtBatSim from "./components/AtBatSim";
+import CommunityLineups from "./components/CommunityLineups";
+import "./index.css";
+
 
 function App() {
   // const [searchParam, setSearchParam] = useState('')
@@ -28,7 +31,7 @@ console.log(players)
 // 	"method": "GET",
 // 	"headers": {
 // 		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
-// 		"x-rapidapi-key": "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80"
+// 		"x-rapidapi-key": process.env.REACT_APP_API_KEY
 // 	}
 // })
 // .then(response => response.json()).then(r => console.log(r))
@@ -56,7 +59,7 @@ console.log(players)
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
           "x-rapidapi-key":
-            "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80",
+            process.env.REACT_APP_API_KEY,
         },
       },
       []
@@ -76,7 +79,7 @@ console.log(players)
   //     "method": "GET",
   //     "headers": {
   //       "x-rapidapi-host": "mlb-data.p.rapidapi.com",
-  //       "x-rapidapi-key": "763701adb8mshd55236eab5b8b65p143ff2jsn82b9c746db80"
+  //       "x-rapidapi-key": process.env.REACT_APP_API_KEY
   //     }
   //   }, [])
   //   .then(response => response.json())
@@ -99,9 +102,10 @@ console.log(players)
   // function displayedHitters(serchResults) {
 
   // }
+  // if (!user) return <LoginPage user={user} setUser={setUser} />
 
   return (
-    <div className="App">
+    <div className="App" style={{width:'100%'}}>
       <Navigation user={user} setUser={setUser} />
       <Routes>
         <Route
@@ -110,6 +114,7 @@ console.log(players)
             <LineupMaker hitters={hitters} user={user} players={players} />
           }
         />
+        <Route path="/communitylineups" element={<CommunityLineups currentUser={user} hitters={hitters} />} />
         <Route path="/mylineups" element={<MyLineups user={user} hitters={hitters} />} />
         <Route path="/simmer" element={<AtBatSim hitters={hitters} pitchers={pitchers}/>} />
         <Route path="/home" element={<HomePage user={user} />} />

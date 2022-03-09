@@ -161,18 +161,6 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
             </td>
           </tr>
           <tr>
-            <td>HR</td>
-            <td>{dingers}</td>
-          </tr>
-          <tr>
-            <td>bb</td>
-            <td>{bbs}</td>
-          </tr>
-          <tr>
-            <td>k's</td>
-            <td>{ks}</td>
-          </tr>
-          <tr>
             <td>avg</td>
             <td>
               {abs
@@ -180,6 +168,20 @@ function SimRunner({ hitter, pitcher, styleA, styleB, styleC, playersChosen, set
                 : 0.0}
             </td>
           </tr>
+          <tr>
+            <td>hr</td>
+            <td>{dingers}</td>
+          </tr>
+          
+          <tr>
+            <td>k's</td>
+            <td>{ks}</td>
+          </tr>
+          <tr>
+            <td>bb</td>
+            <td>{bbs}</td>
+          </tr>
+          
           <tr>
             <td>obp</td>
             <td>

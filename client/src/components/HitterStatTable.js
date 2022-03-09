@@ -85,7 +85,7 @@ function StatTables({ hitter, styleA, styleB, styleC }) {
   }
 
   return (
-    <div style={{marginLeft:'auto'}}>
+    <div style={{margin:'auto', width:'50%'}}>
       <Table
         striped
         bordered
@@ -106,23 +106,24 @@ function StatTables({ hitter, styleA, styleB, styleC }) {
             <td>{hitter.avg}</td>
             <td>{hAvgGrade()}</td>
           </tr>
+          <tr>
+            <td>hr</td>
+            <td>{(+hitter.hr).toLocaleString()}</td>
+            {hHrGrade()}
+          </tr>
          
           <tr>
             <td>k's</td>
-            <td>{hitter.k}</td>
+            <td>{(+hitter.k).toLocaleString()}</td>
             <td>{hKGrade()}</td>
           </tr>
           <tr>
             <td>bbs</td>
-            <td>{hitter.bb}</td>
+            <td>{(+hitter.bb).toLocaleString()}</td>
             <td>{hKGrade()}</td>
           </tr>
          
-          <tr>
-            <td>hr</td>
-            <td>{hitter.hr}</td>
-            {hHrGrade()}
-          </tr>
+          
           <tr>
             <td>slg</td>
             <td>{hitter.slg}</td>

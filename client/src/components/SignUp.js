@@ -8,73 +8,108 @@ function SignUp({setUser, user, login, setLogin }) {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true)
-  const [usernameInUse, setUsernameInUse] = useState(false)
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
-
   function handleSubmit(e) {
-    e.preventDefault();
-    checkUsername()
-  }
-
-  function checkUsername() {
-    const payload = {
+    e.preventDefault(e)
+    // if (password === passwordConfirmation){
+    setErrors([]);
+    setIsLoading(true);
+    fetch("/signup", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({username: username})
-    }
-    fetch("/username", payload)
-    .then((r) => {
+      body: JSON.stringify({
+        username,
+        password,
+        password_confirmation: passwordConfirmation,
+      }),
+    }).then((r) => {
       console.log(r)
+      setIsLoading(false);
       if (r.ok) {
-        setUsernameInUse(false)
-        createAccount()
+        r.json().then((user) => setUser(user));
+        navigate('/home')
       } else {
-        setUsernameInUse(true)
-        resetPasswordFields()
+        r.json().then((err) => setErrors(err.errors));
       }
-    })
-  }
+    });
+  // }
+  // else {
+  //   resetPasswordFields()
+  //  setPasswordMatch(false)
+  // } 
+}
+function resetPasswordFields() {
+  setPassword("")
+  setPasswordConfirmation("")
+}
 
-  function createAccount() {
-    if (password === passwordConfirmation) {
-      const payload = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      }
-      fetch("/users", payload)
-      .then((r) => {
-        console.log(r)
-        if (r.ok) {
-            r.json().then((userResp) => {
-              setUser(userResp)
-              navigate("/home")
-            });
-        } else {
-            r.json().then((err) => console.log(err.errors)); //finish error handling
-        }
-      });
-    } else {
-      resetPasswordFields()
-      setPasswordMatch(false)
-    }
-  }
 
-  function resetPasswordFields() {
-    setPassword("")
-    setPasswordConfirmation("")
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   checkUsername()
+  // }
+
+  // function checkUsername() {
+  //   const payload = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({username: username})
+  //   }
+  //   fetch("/username", payload)
+  //   .then((r) => {
+  //     console.log(r)
+  //     if (r.ok) {
+  //       setUsernameInUse(false)
+  //       createAccount()
+  //     } else {
+  //       setUsernameInUse(true)
+  //       resetPasswordFields()
+  //     }
+  //   })
+  // }
+
+  // function createAccount() {
+  //   if (password === passwordConfirmation) {
+  //     const payload = {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         username: username,
+  //         password: password,
+  //       }),
+  //     }
+  //     fetch("/users", payload)
+  //     .then((r) => {
+  //       console.log(r)
+  //       if (r.ok) {
+  //           r.json().then((userResp) => {
+  //             setUser(userResp)
+  //             navigate("/home")
+  //           });
+  //       } else {
+  //           r.json().then((err) => console.log(err.errors)); //finish error handling
+  //       }
+  //     });
+  //   } else {
+  //     resetPasswordFields()
+  //     setPasswordMatch(false)
+  //   }
+  // }
+
+  // function resetPasswordFields() {
+  //   setPassword("")
+  //   setPasswordConfirmation("")
+  // }
   return (
     <div>
       <Form style={{width:'30%', margin:'auto'}}>
@@ -100,8 +135,9 @@ function SignUp({setUser, user, login, setLogin }) {
         <Button  style={{backgroundColor: 'rgb(255, 187, 2)'}} variant="light" type="submit" onClick={(e) => handleSubmit(e)}>
         {isLoading ? "Loading..." : "Sign Up!"}
         </Button><Button  style={{backgroundColor: 'rgb(255, 187, 2)', marginRight:'auto'}} variant="light" onClick={() => setLogin(!login)}>Already have an account?</Button>
-
-        {!!errors ? <p>{errors}</p> : <></>}
+        {passwordMatch ? <></> : <p style={{margin:'auto'}}><strong>Passwords must match</strong></p>}
+        {!!errors && errors.map((err) => (
+          <div key={err}>{err}</div>))}
       </Form>
     </div>
   )

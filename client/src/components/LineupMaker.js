@@ -38,7 +38,6 @@ function LineupMaker({ user, hitters }) {
       : hitters;
   const [error, setError] = useState("");
   const [isLoaded, setIsLoaded] = useState(true);
-  const [q, setQ] = useState("");
   const [fq, setfQ] = useState("");
   const [secq, setsecQ] = useState("");
   const [thq, setthQ] = useState("");
@@ -48,17 +47,6 @@ function LineupMaker({ user, hitters }) {
   const [rq, setrQ] = useState("");
   const [cq, setcQ] = useState("");
   const navigate = useNavigate();
-
-  console.log(user.id);
-
-  // const [c, setC] = useState({})
-  // const [first, setfirst] = useState({})
-  // const [second, setSecond] = useState({})
-  // const [third, setThird] = useState({})
-  // const [short, setShort] = useState({})
-  // const [left, setLeft] = useState({})
-  // const [center, setCenter] = useState({})
-  // const [right, setRight] = useState({})
   const [newLineup, setNewLineup] = useState({
     catcher_id: 0,
     first_id: 0,

@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LineupCard from "./LineupCard";
+import React, { useState, useRef, useEffect } from "react";
+import Dropdown from "./dropdown/Dropdown";
+import Moment from "moment";
 import { Button, Table } from "react-bootstrap";
+import LineupCard from "./LineupCard";
 
-function MyLineups({ user, hitters }) {
+function CommunityLineups({ currentUser, hitters }) {
   const [playerDeet, setPlayerDeet] = useState([]);
-  const [displayedLineup, setDisplayedLineup] = useState([]);
-  const navigate = useNavigate();
-  const [showLineup, setShowLineup] = useState(false);
+  const [viewStats, setViewStats] = useState(false);
+  const [otherUserSelected, setOtherUserSelected] =useState(false)
+  const [open, setOpen] = useState(false);
+  const [choice, setChoice] = useState(null);
+  const ref = useRef(null);
+  const [userID, setUserID] = useState(0);
+  const [otherUser, setOtherUser] = useState({});
+  const [allUsers, setAllUsers] = useState({});
+  const [mappedUsers, setMappedUsers] = useState({});
+  const [userSearch, setUserSearch] = useState("");
   const [pa, setPa] = useState(0);
   const [ab, setAb] = useState(0);
   const [h, setH] = useState(0);
@@ -17,10 +25,17 @@ function MyLineups({ user, hitters }) {
   const [t, setT] = useState(0);
   const [rbi, setRbi] = useState(0);
   const [sf, setSf] = useState(0);
-  const [viewStats, setViewStats] = useState(false);
   const [loadedStats, setLoadedStats] = useState(false);
-  let style = viewStats ? "50%" : "75%";
+  const [showLineup, setShowLineup] = useState(false);
+  const [displayedLineup, setDisplayedLineup] = useState([]);
 
+  function handleDisplayedLineup(e) {
+    fetch(`/lineups/${e.target.id}`).then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setDisplayedLineup(user));
+      }
+    });
+  }
   function handleLineupStats() {
     fetch(
       `https://mlb-data.p.rapidapi.com/json/named.sport_career_hitting.bam?player_id='${displayedLineup.catcher_id}'&game_type='R'&league_list_id='mlb'`,
@@ -231,12 +246,11 @@ function MyLineups({ user, hitters }) {
     });
     setLoadedStats(true);
   }
-console.log(playerDeet)
+
   useEffect(() => {
     filterHitters();
     handleLineupStats();
   }, [displayedLineup]);
-
   function filterHitters() {
     setPlayerDeet(
       hitters.filter((hitter) => {
@@ -253,20 +267,39 @@ console.log(playerDeet)
       })
     );
   }
-  function handleNav() {
-    navigate("/lineupmaker");
-  }
+  console.log(currentUser);
 
-  function handleDisplayedLineup(e) {
-    fetch(`/lineups/${e.target.id}`).then((response) => {
+  useEffect(() => {
+    fetch("/users").then((response) => {
       if (response.ok) {
-        response.json().then((user) => setDisplayedLineup(user));
+        response.json().then((user) => setAllUsers(user));
       }
     });
+  }, []);
+
+  function handleSubmit() {
+    fetch(`/user/${userID}`).then((response) => {
+      if (response.ok) {
+        response.json().then((user) => {
+          console.log(user);
+          setOtherUser({
+            username: user.username,
+            id: user.id,
+            lineups: user.lineups,
+          });
+        });
+      }
+    });
+    setOtherUserSelected(true)
+    setShowLineup(false)
+    console.log(otherUser);
   }
+
+  console.log(showLineup)
+
   function mappedLineupButtons() {
-    if (!!user.lineups) {
-      return user.lineups.map((lineup, i) => (
+    if (!!otherUser.lineups) {
+      return otherUser.lineups.map((lineup, i) => (
         <Button
           variant="outline-warning"
           className="m-1"
@@ -285,7 +318,7 @@ console.log(playerDeet)
             setRbi(0);
             setSf(0);
           }}
-          style={{color:'black'}}
+          style={{ color: "black" }}
         >
           Lineup #{i + 1}
         </Button>
@@ -293,41 +326,70 @@ console.log(playerDeet)
     }
   }
 
+  useEffect(() => {
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, []);
+
+  const handleChange = (val) => {
+    // setOtherUserSelected(false)
+    setOtherUser({ user: val.username });
+  };
+  console.log(userID);
+
+  const filteredUsers = !!allUsers.length
+    ? allUsers.filter((u) => u.username !== currentUser.username)
+    : {};
+
+  function displayValue() {
+    if (userSearch.length > 0) return userSearch;
+    if (choice) return choice;
+    return "";
+  }
+  function close(e) {
+    setOpen(e && e.target === ref.current);
+  }
+
   return (
     <div
       style={{
-        margin: "auto",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        // width: "33%",
+        // height: "45vw",
       }}
-    >
-      {showLineup ? (
-        <h1
-          style={{
-            display: "flex",
-            // flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textDecorationLine: "underline",
-          }}
-        >
-          Current Lineup
-        </h1>
-      ) : (
-        <h1
-          style={{
-            display: "flex",
-            // flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textDecorationLine: "underline",
-          }}
-        >
-          Click a button to see the corresponding lineup!
-        </h1>
-      )}
+    > {showLineup ? (<>
+          <h1
+            style={{
+              display: "flex",
+              // flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecorationLine: "underline",
+            }}
+          >
+            {`${otherUser.username}'s Lineup`}</h1>
+           
+          </>
+        ) : (
+          <>
+            <h1
+              style={{
+                display: "flex",
+                // flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textDecorationLine: "underline",
+              }}
+            >
+              {otherUserSelected
+                ? `Click a button to see ${otherUser.username}'s lineups!`
+                : `Use the search bar to find a friends' lineups!`}
+            </h1>{" "}
+          </>
+        )}
       <div
         style={{
           margin: "auto",
@@ -335,19 +397,19 @@ console.log(playerDeet)
           // flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          width: style,
+          width:'75%'
         }}
       >
-        <LineupCard
-          playerDeet={playerDeet}
-          viewStats={viewStats}
-          displayedLineup={displayedLineup}
-        />
+       { showLineup ? <LineupCard
+              playerDeet={playerDeet}
+              viewStats={viewStats}
+              displayedLineup={displayedLineup}
+            /> : <></>}
         {viewStats ? (
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
+              // flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               paddingLeft: "5%",
@@ -364,7 +426,7 @@ console.log(playerDeet)
               </thead>
               <tbody>
                 <tr style={{ width: "2000%" }}>
-                  <td>avg</td>
+                  <td>AVG</td>
                   <td>
                     {loadedStats ? (h / ab).toFixed(3) : "calculating..."}
                   </td>
@@ -376,7 +438,7 @@ console.log(playerDeet)
                 </tr>
                 <tr style={{ width: "2000%" }}>
                   <td>Hits</td>
-                  <td>{loadedStats ? h.toLocaleString() : "calculating..."}</td>
+                  <td>{loadedStats ? h : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((h / 22454) * 100).toFixed(1) + "%"
@@ -385,7 +447,7 @@ console.log(playerDeet)
                 </tr>
                 <tr>
                   <td>hr</td>
-                  <td>{loadedStats ? hr.toLocaleString() : "calculating..."}</td>
+                  <td>{loadedStats ? hr : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((hr / 3968) * 100).toFixed(1) + "%"
@@ -393,8 +455,8 @@ console.log(playerDeet)
                   </td>
                 </tr>
                 <tr>
-                  <td>rbi</td>
-                  <td>{loadedStats ? rbi.toLocaleString() : "calculating..."}</td>
+                  <td>RBI</td>
+                  <td>{loadedStats ? rbi : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((rbi / 14394) * 100).toFixed(1) + "%"
@@ -402,7 +464,7 @@ console.log(playerDeet)
                   </td>
                 </tr>
                 <tr>
-                  <td>obp</td>
+                  <td>OBP</td>
                   <td>
                     {loadedStats
                       ? ((h + bb) / (ab + bb + sf)).toFixed(3)
@@ -418,7 +480,7 @@ console.log(playerDeet)
                   </td>
                 </tr>
                 <tr>
-                  <td>slg</td>
+                  <td>SLG</td>
                   <td>
                     {loadedStats
                       ? (
@@ -443,154 +505,111 @@ console.log(playerDeet)
           </div>
         ) : (
           <></>
+        )} </div>
+        <div
+          style={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: '50%',
+          }}
+        >
+        </div>
+        <div
+          style={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            // width: style,
+          }}
+        >
+        {showLineup && (
+          <Button
+            style={{ backgroundColor: "rgb(255, 187, 2)" }}
+            variant="light"
+            className="m-1"
+            onClick={() => setViewStats(!viewStats)}
+          >
+            <strong>View this lineups' stats</strong>
+          </Button>
         )}
-      </div>{ showLineup && <Button
-          style={{ backgroundColor: "rgb(255, 187, 2)" }}
-          variant="light"
-          className="m-1"
-          onClick={() => setViewStats(!viewStats)}
+        <div
+          style={{
+            margin: "auto",
+            display: "flex",
+            // flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "50%",
+            flexWrap: "wrap",
+          }}
         >
-          <strong>View this lineups' stats</strong>
-        </Button>}
-      <div
-        style={{
-          margin: "auto",
-          display: "flex",
-          // flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "30%",
-          flexWrap: "wrap",
-        }}
-      >
-        {mappedLineupButtons()}
-        
+          {mappedLineupButtons()}
+       
       </div>
-        <Button
-          style={{ backgroundColor: "rgb(255, 187, 2)" }}
-          variant="light"
-          className="m-1"
-          onClick={handleNav}
-        >
-          <strong>Make a new Lineup!</strong>
-        </Button>
+      <div className="dropdown" style={{ width: 160 }}>
+        <div className="control" onClick={() => setOpen((prev) => !prev)}>
+          <div className="selected-value">
+            <input
+              type="search"
+              placeholder={`Select User...`}
+              ref={ref}
+              value={displayValue()}
+              required
+              style={{ width: 110, fontSize: "10pt" }}
+              onChange={(e) => {
+                setUserSearch(e.target.value);
+
+                setOtherUser(e.target.value);
+              }}
+              onClick={() => setOpen((prev) => !prev)}
+            />
+          </div>
+          <div
+            className={`arrow ${open ? "open" : null}`}
+            onClick={() => setOpen((prev) => !prev)}
+          />
+        </div>
+        <div className={`options ${open ? "open" : null}`}>
+          {userSearch.length > 2 || choice
+            ? filteredUsers
+                .filter((p) =>
+                  p.username.toLowerCase().includes(userSearch.toLowerCase())
+                )
+                .map((p) => (
+                  <div
+                    id={p.id}
+                    className="option"
+                    onClick={(p) => {
+                      setUserSearch("");
+                      
+                      handleChange(p);
+                      console.log(p.target.innerText)
+                      setOpen(false);
+                      setChoice(p.target.innerText);
+                      setUserID(p.target.id);
+                      setViewStats(false)
+                      setShowLineup(false)
+                      setOtherUserSelected(false)
+                    }}
+                    key={p.id}
+                  >
+                    {p.username}
+                  </div>
+                ))
+            : "please enter at least 3 characters"}
+          {/* options.map(option => <div className='option'>{option.name}</div>)
+        } */}
+        </div>
+        </div>
+      </div>
+      <Button variant='warning' className='m-4' onClick={handleSubmit}>Search Their Lineups</Button>
     </div>
   );
 }
 
-export default MyLineups;
-// function renderLineup() {
-//   let arr = []
-//   if (!!user.lineups) {
-//    user.lineups.map((p) => {
-//      for (let l in p){
-//       //  console.log('l:',l)
-//       // console.log('p:',p)
-//       // console.log(p[l])
-//        fetch(
-//         `http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='${p[l]}'`,
-//         {
-//           method: "GET",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         },
-//         []
-//       ).then((response) => {
-//         // if (response.ok) {
-//           // console.log('response:', response)
-//           response
-//             .json()
-//             .then((r) => {
-//               // console.log('r.json: ', r)
-//               arr.push({name: r.player_info.queryResults.row.name_display_first_last, position: r.player_info.queryResults.row.primary_position_txt })})
-//         // }
-//       });
-//      setPlayerDeet(arr)
-//    }}
-//     );
-//   }
-//   console.log(playerDeet)
-// }
-
-// !!!! WORKING BACKEND FETCH
-// function renderLineup() {
-//   let arr = [];
-//   if (!!displayedLineup) {
-//     for (let p in displayedLineup) {
-//       fetch(
-//         `names/${displayedLineup[p]}`,
-//         {
-//           method: "GET",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         },
-//         []
-//       ).then((response) => {
-//         if (response.ok) {
-//           response.json().then((r) => {
-//             arr.push({
-//               name: r.player_info.queryResults.row.name_first,
-//               position: r.player_info.queryResults.row,
-//             });
-//           });
-//         }
-//       });
-//       setPlayerDeet(arr);
-//     }
-//   }
-//   console.log(playerDeet);
-// }
-
-// function renderLineups() {
-//   console.log(user.lineups);
-//   const array = []
-
-//   if (user.lineups) user.lineups.map((lineup) => {
-//     for (const l in lineup){
-//       fetch(`http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='${lineup[l]}'`, {
-//               "method": "GET",
-//               "headers": {
-//                 "Content-Type": "application/json",
-//               }
-//             }, [])
-//             .then(response => response.json())
-//             .then((r) => {
-//               // setPlayerDeet(r.player_info.queryResults.row.name_display_first_last)
-//               array.push(r.player_info.queryResults.row.name_display_first_last)
-//             }
-//              ) }})
-//   console.log(array)
-//   array.map((a) => {
-//     return <p>{a}</p>
-//   })
-// }
-
-// const mappedLineupButtons = !!user.lineups
-//   ? user.lineups.map((lineup) => {
-//     const array = []
-//       for (const p in lineup) {
-//         fetch(
-//           `http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='${lineup[p]}'`,
-//           {
-//             method: "GET",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//           },
-//           []
-//         )
-//           .then((response) => response.json())
-//           .then((r) =>
-//             console.log(r.player_info.queryResults.row.name_display_first_last)
-//           )
-//           }
-//           (console.log(array))
-//           // setPlayerDeet(array)
-//     })
-//   : null;
-// return (<p>{playerDeet}</p>)
-// .catch(err => {
-//   console.error(err);
-// }setPlayerDeet('')}) : null
+export default CommunityLineups;

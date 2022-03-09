@@ -24,7 +24,7 @@ function LineupCard({ lineups, playerDeet, viewStats }) {
       <Table striped bordered hover size="sm" style={{ width: "100%" }}>
         <tbody>
           <tr>
-            <td style={{ width: "10%" }}>{i + 1}</td>
+            <td style={{ width: "3%" }}>{i + 1}</td>
             <td style={{ textAlign: "center" }}>
               <strong>
                 {player.name_display_first_last}, {player.position}
