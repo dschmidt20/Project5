@@ -16,7 +16,6 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [user, setUser] = useState({});
 const playersAPI = '/players'
-
 console.log(players)
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -58,8 +57,7 @@ console.log(players)
         method: "GET",
         headers: {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
-          "x-rapidapi-key":
-            process.env.REACT_APP_API_KEY,
+          "x-rapidapi-key": process.env.REACT_APP_API_KEY,
         },
       },
       []
