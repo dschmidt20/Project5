@@ -15,8 +15,6 @@ function App() {
   // const [searchParam, setSearchParam] = useState('')
   const [players, setPlayers] = useState([]);
   const [user, setUser] = useState({});
-const playersAPI = '/players'
-console.log(players)
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {

@@ -19,6 +19,9 @@ def show
     render json: Lineup.find(params[:id])
 
 end
+def index
+    render json: Lineup.all
+end
 
 def get_names
     url = URI("https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id='#{params[:id]}'")

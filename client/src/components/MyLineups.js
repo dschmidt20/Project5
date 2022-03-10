@@ -8,7 +8,6 @@ function MyLineups({ user, hitters }) {
   const [displayedLineup, setDisplayedLineup] = useState([]);
   const navigate = useNavigate();
   const [showLineup, setShowLineup] = useState(false);
-  const [pa, setPa] = useState(0);
   const [ab, setAb] = useState(0);
   const [h, setH] = useState(0);
   const [hr, setHr] = useState(0);
@@ -35,7 +34,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -60,7 +58,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -85,7 +82,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -110,7 +106,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -135,7 +130,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -160,7 +154,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -185,7 +178,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -210,7 +202,6 @@ function MyLineups({ user, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -269,7 +260,6 @@ function MyLineups({ user, hitters }) {
             setLoadedStats(false);
             setAb(0);
             setHr(0);
-            setPa(0);
             setH(0);
             setBb(0);
             setD(0);

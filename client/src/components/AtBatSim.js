@@ -14,6 +14,7 @@ function AtBatSim({ hitters, pitchers }) {
   const [pitcher, setPitcher] = useState([]);
   const [playersChosen, setPlayersChosen] = useState(true);
   const [nowSimming, setNowSimming] = useState(false);
+  console.log(hitters)
 
   function handleSubmit() {
     if(hitter.length === 0){
@@ -122,14 +123,15 @@ function AtBatSim({ hitters, pitchers }) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            // height:'50vh'
           }}
         >
-          <h1>Welcome to the At Bat Simulator</h1>
-          <h5>
-            Pick any pitcher to face off against any hitter, and we'll show the
+          <h1 style={{padding:'13px'}}>Welcome to the At Bat Simulator</h1>
+          <h5 style={{padding:'13px'}}>
+            Pick any pitcher to face off against any hitter, and simulate the
             results!
           </h5>
-          <h6>Click the button below to get started!</h6>
+          <h6 style={{padding:'13px'}}>Click the button below to get started!</h6>
           <img
             src="https://www.fg-a.com/sports/baseball-umpire-1.gif"
             alt="ump"
@@ -179,6 +181,7 @@ function AtBatSim({ hitters, pitchers }) {
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
+              paddingTop:'10%'
             }}
           >
             <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}}
@@ -204,7 +207,8 @@ function AtBatSim({ hitters, pitchers }) {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              width:'50%'
+              width:'50%',
+              paddingLeft:'10%'
             }}
           >
             <h2>Choose your Hitter!</h2>
@@ -234,7 +238,8 @@ function AtBatSim({ hitters, pitchers }) {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              width:'50%'
+              width:'50%',
+              paddingRight:'10%'
             }}
           >
             <div
@@ -244,6 +249,7 @@ function AtBatSim({ hitters, pitchers }) {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                
               }}
             >
               <h2>Choose your Pitcher!</h2>
@@ -273,7 +279,7 @@ function AtBatSim({ hitters, pitchers }) {
               alignItems: "center",
               justifyContent: "center",
 }}>
-              <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} onClick={handleSubmit}>Start Sim</Button>
+              <Button variant="light" style={{backgroundColor: 'rgb(255, 187, 2)'}} onClick={handleSubmit}>Select These Players</Button>
             </div>
             </div>
       )}

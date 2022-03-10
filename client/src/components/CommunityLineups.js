@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Dropdown from "./dropdown/Dropdown";
-import Moment from "moment";
 import { Button, Table } from "react-bootstrap";
 import LineupCard from "./LineupCard";
 
@@ -14,9 +12,7 @@ function CommunityLineups({ currentUser, hitters }) {
   const [userID, setUserID] = useState(0);
   const [otherUser, setOtherUser] = useState({});
   const [allUsers, setAllUsers] = useState({});
-  const [mappedUsers, setMappedUsers] = useState({});
   const [userSearch, setUserSearch] = useState("");
-  const [pa, setPa] = useState(0);
   const [ab, setAb] = useState(0);
   const [h, setH] = useState(0);
   const [hr, setHr] = useState(0);
@@ -51,7 +47,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -77,7 +72,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -103,7 +97,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -129,7 +122,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -155,7 +147,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -181,7 +172,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -207,7 +197,6 @@ function CommunityLineups({ currentUser, hitters }) {
       if (response.ok) {
         response.json().then((r) => {
           console.log(r);
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -232,7 +221,6 @@ function CommunityLineups({ currentUser, hitters }) {
     ).then((response) => {
       if (response.ok) {
         response.json().then((r) => {
-          setPa((pa) => pa + +r.sport_career_hitting.queryResults.row.tpa);
           setAb((ab) => ab + +r.sport_career_hitting.queryResults.row.ab);
           setH((h) => h + +r.sport_career_hitting.queryResults.row.h);
           setHr((hr) => hr + +r.sport_career_hitting.queryResults.row.hr);
@@ -272,7 +260,8 @@ function CommunityLineups({ currentUser, hitters }) {
   useEffect(() => {
     fetch("/users").then((response) => {
       if (response.ok) {
-        response.json().then((user) => setAllUsers(user));
+        response.json().then((user) => setAllUsers(user)
+        );
       }
     });
   }, []);
@@ -310,7 +299,6 @@ function CommunityLineups({ currentUser, hitters }) {
             setLoadedStats(false);
             setAb(0);
             setHr(0);
-            setPa(0);
             setH(0);
             setBb(0);
             setD(0);
@@ -428,7 +416,7 @@ function CommunityLineups({ currentUser, hitters }) {
               </thead>
               <tbody>
                 <tr style={{ width: "2000%" }}>
-                  <td>AVG</td>
+                  <td>avg</td>
                   <td>
                     {loadedStats ? (h / ab).toFixed(3) : "calculating..."}
                   </td>
@@ -440,7 +428,7 @@ function CommunityLineups({ currentUser, hitters }) {
                 </tr>
                 <tr style={{ width: "2000%" }}>
                   <td>hits</td>
-                  <td>{loadedStats ? h : "calculating..."}</td>
+                  <td>{loadedStats ? h.toLocaleString() : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((h / 22454) * 100).toFixed(1) + "%"
@@ -449,7 +437,7 @@ function CommunityLineups({ currentUser, hitters }) {
                 </tr>
                 <tr>
                   <td>hr</td>
-                  <td>{loadedStats ? hr : "calculating..."}</td>
+                  <td>{loadedStats ? hr.toLocaleString() : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((hr / 3968) * 100).toFixed(1) + "%"
@@ -457,8 +445,8 @@ function CommunityLineups({ currentUser, hitters }) {
                   </td>
                 </tr>
                 <tr>
-                  <td>RBI</td>
-                  <td>{loadedStats ? rbi : "calculating..."}</td>
+                  <td>rbi</td>
+                  <td>{loadedStats ? rbi.toLocaleString() : "calculating..."}</td>
                   <td>
                     {loadedStats
                       ? ((rbi / 14394) * 100).toFixed(1) + "%"
@@ -466,7 +454,7 @@ function CommunityLineups({ currentUser, hitters }) {
                   </td>
                 </tr>
                 <tr>
-                  <td>OBP</td>
+                  <td>obp</td>
                   <td>
                     {loadedStats
                       ? ((h + bb) / (ab + bb + sf)).toFixed(3)
@@ -482,7 +470,7 @@ function CommunityLineups({ currentUser, hitters }) {
                   </td>
                 </tr>
                 <tr>
-                  <td>SLG</td>
+                  <td>slg</td>
                   <td>
                     {loadedStats
                       ? (
@@ -577,9 +565,8 @@ function CommunityLineups({ currentUser, hitters }) {
           />
         </div>
         <div className={`options ${open ? "open" : null}`}>
-          {userSearch.length > 2 || choice
-            ? filteredUsers
-                .filter((p) =>
+          {(userSearch.length >= 0 || choice) && !!filteredUsers.length &&
+                filteredUsers.filter((p) =>
                   p.username.toLowerCase().includes(userSearch.toLowerCase())
                 )
                 .map((p) => (
@@ -603,7 +590,7 @@ function CommunityLineups({ currentUser, hitters }) {
                     {p.username}
                   </div>
                 ))
-            : "please enter at least 3 characters"}
+            }
           {/* options.map(option => <div className='option'>{option.name}</div>)
         } */}
         </div>

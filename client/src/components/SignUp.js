@@ -38,78 +38,9 @@ function SignUp({setUser, user, login, setLogin }) {
         r.json().then((err) => setErrors(err.errors));
       }
     });
-  // }
-  // else {
-  //   resetPasswordFields()
-  //  setPasswordMatch(false)
-  // } 
-}
-function resetPasswordFields() {
-  setPassword("")
-  setPasswordConfirmation("")
+
 }
 
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   checkUsername()
-  // }
-
-  // function checkUsername() {
-  //   const payload = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({username: username})
-  //   }
-  //   fetch("/username", payload)
-  //   .then((r) => {
-  //     console.log(r)
-  //     if (r.ok) {
-  //       setUsernameInUse(false)
-  //       createAccount()
-  //     } else {
-  //       setUsernameInUse(true)
-  //       resetPasswordFields()
-  //     }
-  //   })
-  // }
-
-  // function createAccount() {
-  //   if (password === passwordConfirmation) {
-  //     const payload = {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         username: username,
-  //         password: password,
-  //       }),
-  //     }
-  //     fetch("/users", payload)
-  //     .then((r) => {
-  //       console.log(r)
-  //       if (r.ok) {
-  //           r.json().then((userResp) => {
-  //             setUser(userResp)
-  //             navigate("/home")
-  //           });
-  //       } else {
-  //           r.json().then((err) => console.log(err.errors)); //finish error handling
-  //       }
-  //     });
-  //   } else {
-  //     resetPasswordFields()
-  //     setPasswordMatch(false)
-  //   }
-  // }
-
-  // function resetPasswordFields() {
-  //   setPassword("")
-  //   setPasswordConfirmation("")
-  // }
   return (
     <div>
       <Form style={{width:'30%', margin:'auto'}}>

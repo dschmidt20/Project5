@@ -41,7 +41,7 @@ function LoginForm({setUser, user, login, setLogin }) {
 
   return (
     <div>
-      <Form style={{width:'30%', margin:'auto'}}>
+      <Form style={{width:'30%', margin:'auto'}} autoComplete='off'>
         <Form.Group className="mb-3" controlId="formBasicEmail" >
           <Form.Label>Username</Form.Label>
           <Form.Control value={username}
