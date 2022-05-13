@@ -6,3 +6,5 @@ You can simulate at-bats between any hitter and any pitcher in history and, usin
 Lastly, you can view the what lineups the other users on the app have created and see how your creations stack up.
 
 This app was created in React.js with a Ruby on Rails backend, and used a mix of React Bootstrap and CSS for styling.
+
+View a video demo here! - https://www.youtube.com/watch?v=K1UxjTwdctY
